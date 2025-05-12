@@ -3,35 +3,35 @@ name: Build Windows .exe
 on:
   push:
     branches:
-      - main  # Trigger the workflow on push to the main branch
+      - main
 
 jobs:
   build:
-    runs-on: windows-latest  # Use Windows runner
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2  # Checkout the code from the repo
+      uses: actions/checkout@v2
 
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'  # Set up the Python version you need
+        python-version: '3.8'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Install dependencies listed in requirements.txt
+        pip install -r requirements.txt
 
     - name: Install PyInstaller
-      run: pip install pyinstaller  # Install PyInstaller to build the executable
+      run: pip install pyinstaller
 
     - name: Build the .exe
       run: |
-        pyinstaller --noconsole --onefile --add-data "audio\\sound.mp3;audio" app.py  # Build the .exe
+        pyinstaller --noconsole --onefile --add-data "audio\\sound.mp3;audio" app.py
 
     - name: Upload .exe as artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: RandomAudioPlayer
-        path: dist/app.exe  # Upload the built .exe as an artifact
+        path: dist/app.exe
