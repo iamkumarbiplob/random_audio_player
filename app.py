@@ -19,7 +19,7 @@ AUDIO_FILE = get_audio_path()
 
 def play_audio_periodically():
     while True:
-        delay = random.randint(0, 30 * 60)  # 0–1800 seconds
+        delay = random.randint(0, 25 * 60) 
         print(f"wait: {delay}")
         time.sleep(delay)
         try:
